@@ -5,7 +5,6 @@ progress page.
 """
 import ddt
 
-from bok_choy.javascript import js_defined
 from contextlib import contextmanager
 from nose.plugins.attrib import attr
 from flaky import flaky
@@ -127,7 +126,6 @@ class ProgressPageBaseTest(UniqueCourseTest):
 
 @attr(shard=9)
 @ddt.ddt
-@js_defined('window.jQuery')
 class PersistentGradesTest(ProgressPageBaseTest):
     """
     Test that grades for completed assessments are persisted
