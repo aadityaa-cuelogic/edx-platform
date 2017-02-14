@@ -117,6 +117,7 @@ class CoursewarePage(CoursePage):
         """
         sequential_position_css = '#sequence-list #tab_{0}'.format(sequential_position - 1)
         self.q(css=sequential_position_css).first.click()
+        self.wait_for_ajax()
 
     @property
     def sequential_position(self):
