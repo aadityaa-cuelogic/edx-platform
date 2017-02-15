@@ -18,6 +18,8 @@
     % endif
   >
     <div class="colophon">
+      <span>Hello I am is Aaditya <button onclick="custom_btn_alert();">Click Me</button></span>
+
       <nav class="nav-colophon" aria-label="${_('About')}">
         <ol>
             % for item_num, link in enumerate(footer['navigation_links'], start=1):
@@ -38,7 +40,7 @@
             ## can be included in the footer on other sites
             ## (e.g. a blog or marketing front-end) to provide a consistent
             ## user experience.  See the branding app for details.
-            <img alt="organization logo" src="${footer['logo_image']}">
+            <img alt="organization logo" class="custom_logo" src="${footer['logo_image']}">
           </a>
         </p>
       </div>
