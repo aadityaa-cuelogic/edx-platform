@@ -1,7 +1,4 @@
-<article class="course custom-ribbon" role="region" aria-label="<%- content.display_name %>">
-    <% if (org == "MyOrg") { %>
-        <div class="ribbon"><span>RIBBON</span></div>
-    <% } %>
+<article class="course test-theme" role="region" aria-label="<%- content.display_name %>">
     <a href="/courses/<%- course %>/about">
         <header class="course-image">
             <div class="cover-image">
