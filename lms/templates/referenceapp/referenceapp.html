@@ -1,0 +1,81 @@
+<%page expression_filter="h"/>
+<%inherit file="../main.html" />
+<%def name="online_help_token()"><% return "learnerdashboard" %></%def>
+<%namespace name='static' file='../static_content.html'/>
+<%!
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
+from django.template import RequestContext
+import third_party_auth
+from third_party_auth import pipeline
+from openedx.core.djangolib.js_utils import dump_js_escaped_json, js_escaped_string
+from openedx.core.djangolib.markup import HTML, Text
+%>
+
+<%
+  cert_name_short = settings.CERT_NAME_SHORT
+  cert_name_long = settings.CERT_NAME_LONG
+%>
+
+
+<%block name="pagetitle">${_("Referenceapp")}</%block>
+<%block name="bodyclass">view-referenceapp is-authenticated</%block>
+
+<script type="text/javascript" src="${static.url('referenceapp/customjs.js')}"></script>
+<style type="text/css">
+	table#referenceapp_table{
+		border-collapse: collapse;
+		width: 100%;
+	}
+	table#referenceapp_table, table#referenceapp_table th, table#referenceapp_table td {
+	   border: 1px solid black;
+	   padding: 15px;
+	}
+	.dnone {
+		display: none;
+	}
+	.loading {
+	  border: 16px solid #f3f3f3;
+	  border-radius: 50%;
+	  border-top: 16px solid #3498db;
+	  width: 120px;
+	  height: 120px;
+	  -webkit-animation: spin 2s linear infinite;
+	  animation: spin 2s linear infinite;
+	}
+
+	@-webkit-keyframes spin {
+	  0% { -webkit-transform: rotate(0deg); }
+	  100% { -webkit-transform: rotate(360deg); }
+	}
+
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}
+</style>
+<main id="main" aria-label="Content" tabindex="-1">
+    <div class="container referenceapp" id="referenceapp-main">
+    	<div class="my-courses" id="my-courses">
+	        <header class="wrapper-header-courses">
+	          <h2 class="header-courses">${_("My Courses")}</h2>
+	        </header>
+	        <div>
+		        <table id="referenceapp_table" class="table table-hover">
+					<caption>ReferenceApp List</caption> <a href="/referenceapp/addreferencelinks/">Add New</a>
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Name</th>
+							<th>Link</th>
+							<th>Description</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+	    </div>
+    </div>
+</main>
