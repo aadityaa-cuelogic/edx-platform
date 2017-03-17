@@ -209,6 +209,11 @@ FEATURES = {
 
     # Show Language selector
     'SHOW_LANGUAGE_SELECTOR': False,
+
+    # If set to True, Studio won't restrict the set of advanced components
+    # to just those pre-approved by edX    
+    ### TFI Specific Modification    
+    'ALLOW_ALL_ADVANCED_COMPONENTS': True,
 }
 
 ENABLE_JASMINE = False
@@ -475,15 +480,15 @@ HTTPS = 'on'
 ROOT_URLCONF = 'cms.urls'
 
 # Email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = 'registration@example.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'adityaagrawal99601@gmail.com'
+EMAIL_HOST_PASSWORD = 'Aaditya@9960'
+DEFAULT_FROM_EMAIL = 'adityaagrawal99601@gmail.com'
 DEFAULT_FEEDBACK_EMAIL = 'feedback@example.com'
-SERVER_EMAIL = 'devops@example.com'
+SERVER_EMAIL = 'adityaagrawal99601@gmail.com'
 ADMINS = ()
 MANAGERS = ADMINS
 

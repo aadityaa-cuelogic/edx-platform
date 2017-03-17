@@ -60,7 +60,8 @@ CONFIG_PREFIX = SERVICE_VARIANT + "." if SERVICE_VARIANT else ""
 DEBUG = False
 TEMPLATE_DEBUG = False
 
-EMAIL_BACKEND = 'django_ses.SESBackend'
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 

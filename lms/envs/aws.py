@@ -49,7 +49,8 @@ CONFIG_PREFIX = SERVICE_VARIANT + "." if SERVICE_VARIANT else ""
 DEBUG = False
 DEFAULT_TEMPLATE_ENGINE['OPTIONS']['debug'] = False
 
-EMAIL_BACKEND = 'django_ses.SESBackend'
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # IMPORTANT: With this enabled, the server must always be behind a proxy that

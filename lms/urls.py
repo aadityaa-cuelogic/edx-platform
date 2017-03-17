@@ -75,6 +75,12 @@ urlpatterns = (
     # Feedback Form endpoint
     url(r'^submit_feedback$', 'util.views.submit_feedback'),
 
+
+    # Aaditya Form endpoint
+    url(r'^submit_contact_email$',
+        'static_template_view.views.submit_contact_email'),
+
+
     # Enrollment API RESTful endpoints
     url(r'^api/enrollment/v1/', include('enrollment.urls')),
 

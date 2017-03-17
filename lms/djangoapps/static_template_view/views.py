@@ -10,9 +10,14 @@ from mako.exceptions import TopLevelLookupException
 from django.shortcuts import redirect
 from django.conf import settings
 from django.http import HttpResponseNotFound, HttpResponseServerError, Http404
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
 from util.cache import cache_if_anonymous
+
+import re
+from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from django.core.validators import validate_email, ValidationError
 
 valid_templates = []
 
@@ -29,6 +34,36 @@ def index(request, template):
         return render_to_response('static_templates/' + template, {})
     else:
         return redirect('/')
+
+
+
+
+@csrf_exempt
+def submit_contact_email(request):
+    if request.method == 'POST':
+        e_sub = request.POST.get('subject')
+        e_msg = request.POST.get('desc')
+        e_name = request.POST.get('name')
+        email_to = request.POST.get('email')
+        send_mail_flag = False
+        try:
+            validate_email(email_to)
+            send_mail_flag = True
+        except ValidationError:
+            return redirect('/contact')
+
+        if send_mail_flag == True:
+            try:
+                email =  EmailMessage(e_sub, e_msg, to=[email_to])
+                email.send()
+            except Exception as ex:
+                return redirect('/contact')
+        return HttpResponse(status=200)
+    elif request.method == "GET":
+        return redirect('/contact')
+    else:
+        return redirect('/contact')
+
 
 
 @ensure_csrf_cookie

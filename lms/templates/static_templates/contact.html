@@ -8,5 +8,55 @@
     <section class="container about">
         <h1>${_("Contact")}</h1>
         <p>${_("This page left intentionally blank. Feel free to add your own content.")}</p>
+        <form method="post" action="/submit_contact_email" onSubmit="return send_email_help();">
+        <input type="hidden" name="csrfmiddlewaretoken" value="${ csrf_token }">
+        <ol class="list-input">
+		    <li class="field required text" id="field-email">
+		      <label for="email">${_('E-mail')}</label>
+		      <input id="email" type="email" name="email" placeholder="${_('example: username@domain.com')}" required aria-required="true" />
+		    </li>
+
+		    <li class="field required text" id="field-name">
+		      <label for="name">${_('Full Name')}</label>
+		      <input id="name" type="text" name="name" placeholder="${_('example: Jane Doe')}" required aria-required="true" aria-describedby="name-tip" />
+		      <span class="tip tip-input" id="name-tip">${_("Your legal name, used for any certificates you earn.")}</span>
+		    </li>
+
+		    <li class="field required text" id="field-subject">
+		      <label for="subject">${_('Subject')}</label>
+		      <input id="subject" type="text" name="subject" placeholder="${_('example: JaneDoe')}" required aria-required="true" aria-describedby="subject-tip"/>
+		      <span class="tip tip-input" id="subject-tip">${_('Will be shown in any discussions or forums you participate in')} <strong>(${_('cannot be changed later')})</strong></span>
+		    </li>
+
+		    <li class="field required text" id="field-desc">
+		      <label for="desc">${_('Description')}</label>
+		      <input id="desc" type="text" name="desc" value="" placeholder="${_('example: JaneDoe')}" required aria-required="true" aria-describedby="desc-tip"/>
+		      <span class="tip tip-input" id="desc-tip">${_('Will be shown in any discussions or forums you participate in')} <strong>(${_('cannot be changed later')})</strong></span>
+		    </li>
+
+		  </ol>
+		<div class="form-actions">
+			<button name="submit" type="submit" id="submit" class="action action-primary">${_('Submit')}</button>
+		</div>
+		</form>
     </section>
 </main>
+<script type="text/javascript">
+function validateEmail(email) {
+		    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		    return re.test(email);
+		}
+
+		function send_email_help(){
+			var email_id = $('#field-email').find('#email').val().trim();
+			var email_sub = $('#field-subject').find('#subject').val().trim();
+			var email_desc = $('#field-desc').find('#desc').val().trim();
+			var email_user = $('#field-name').find('#name').val().trim();
+
+			if (email_sub.length > 0 && email_desc.length > 0 && email_user.length > 0 && validateEmail(email_id)){
+				return false;
+			}
+			alert("Invalid input values");
+			return false;
+		}
+</script>
